@@ -6,7 +6,7 @@ const loadCategory = () => {
 }
 
 // display all news categories
-const displayCategory = (categories) => {
+const displayCategory = categories => {
     const newsCategoryField = document.getElementById('news-catagory-field')
     categories.forEach(element => {
         //console.log(element);
@@ -14,6 +14,7 @@ const displayCategory = (categories) => {
         newsCategoryNamesDiv.innerHTML = ` 
            <button onclick="getNewsId('${element.category_id}')" type="button" class="btn-style btn-hover"><h6>${element.category_name}</h6></button> 
        ` 
+       
        newsCategoryField.appendChild(newsCategoryNamesDiv);
     });
 }
@@ -22,7 +23,10 @@ loadCategory();
 
 
 // getting category ID 
-const getNewsId = (news_id) => {
+const getNewsId = news_id => {
+
+    spinner(true); // start spinner
+
     const url = `https://openapi.programming-hero.com/api/news/category/${news_id}`;
     fetch(url)
     .then(res => res.json())
@@ -30,14 +34,15 @@ const getNewsId = (news_id) => {
 }
 
 // desplaying the news
-const displayNewsDetail = (newsArray) =>{
+const displayNewsDetail = newsArray =>{
     displayTotalNews(newsArray); // this is for total number of news
 
     const displayNewsFiled = document.getElementById('display-news-field');
     displayNewsFiled.innerHTML = '';
     
+    newsArray.sort((a, b) => b.total_view - a.total_view); // array elements shorted 
+    
     newsArray.forEach(news =>{
-        console.log(news);
         const displayElementDiv = document.createElement('div');
         displayElementDiv.innerHTML = `
         <div class="row mt-5 border-0 rounded bg-light p-4">
@@ -51,15 +56,16 @@ const displayNewsDetail = (newsArray) =>{
                     <div class="col-4">
                         <div class="row align-items-center">
                             <div class="col-4">
-                                <img class="img-header m-0 p-0" src="img/profile-pic-header.jpg" width="30" height="30" alt="">
+                                <img class="img-header m-0 p-0" src="${news.author.img}" width="30" height="30" alt="">
                             </div>
                             <div class="col-8 m-0 p-0">
-                                <h6>Jane Cooper</h6>
+                                <h6>${news.author.name? news.author.name:'No name Found'}</h6>
+                                <p>${news.author.published_date? news.author.published_date: 'no date found'}</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-4"><i class="fa-solid fa-eye"></i>1.5M</div>
-                    <div class="col-4"><button class="btn btn-outline-primary">See more</button></div>
+                    <div class="col-4"><i class="fa-solid fa-eye"></i>${news.total_view? news.total_view: 'Not found'}</div>
+                    <div class="col-4"><button  class="btn btn-outline-primary">See more</button></div>
                 </div>
             </div>
         </div>
@@ -67,5 +73,7 @@ const displayNewsDetail = (newsArray) =>{
 
         displayNewsFiled.appendChild(displayElementDiv);
     })
+
+    spinner(false); // stop spinner 
 
 }

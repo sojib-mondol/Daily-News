@@ -10,3 +10,13 @@ const displayTotalNews = (newsArray) => {
     `;
     totalNewsField.appendChild(totalNewsDiv);
 }
+
+// for spinner
+const spinnerField = document.getElementById('spinner-field');
+const spinner = isTrue => {
+    if(isTrue) {
+        spinnerField.classList.remove('d-none');
+    }else {
+        spinnerField.classList.add('d-none');
+    }
+}
