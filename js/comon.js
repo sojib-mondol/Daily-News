@@ -6,7 +6,7 @@ const displayTotalNews = (newsArray) => {
     totalNewsField.innerHTML = '';
     const totalNewsDiv = document.createElement('div');
     totalNewsDiv.innerHTML = `
-        <h6>${newsArray.length} items found for category Entertainment</h6>
+        <h6 class='bg-light p-3 rounded'>${newsArray.length} items found for category Entertainment</h6>
     `;
     totalNewsField.appendChild(totalNewsDiv);
 }
