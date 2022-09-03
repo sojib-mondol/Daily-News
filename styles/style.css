@@ -23,3 +23,10 @@ body{
     padding-left: 20px;
     padding-right: 20px;
 }
+
+.footer-style{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+}
