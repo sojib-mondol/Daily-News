@@ -1,14 +1,23 @@
 
 // for displaying total number of news
-const displayTotalNews = (newsArray) => {
+const displayTotalNews = newsArray => {
     const totalNews = newsArray.length;
+
     const totalNewsField = document.getElementById('total-news-field');
     totalNewsField.innerHTML = '';
+
     const totalNewsDiv = document.createElement('div');
-    totalNewsDiv.innerHTML = `
-        <h6 class='bg-light p-3 rounded'>${newsArray.length} items found for category Entertainment</h6>
-    `;
-    totalNewsField.appendChild(totalNewsDiv);
+    if(totalNews > 0) {
+        totalNewsDiv.innerHTML = `
+            <h6 class='bg-light p-3 rounded'>${newsArray.length} news found</h6>
+        `;
+        totalNewsField.appendChild(totalNewsDiv);
+    } else {
+        totalNewsDiv.innerHTML = `
+            <h6 class='bg-light p-3 rounded'>No news found</h6>
+        `;
+        totalNewsField.appendChild(totalNewsDiv);
+    }
 }
 
 // for spinner
