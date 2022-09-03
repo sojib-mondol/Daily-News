@@ -7,3 +7,16 @@
 .img-header{
     border-radius: 50%;
 }
+
+.btn-hover:hover{
+    border: none ;
+    color: #0dcaf0 ;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+.btn-style{
+    border: none;
+    background-color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+}
