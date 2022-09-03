@@ -92,6 +92,7 @@ const getModalNewsId = id => {
 const displayNewsModal = dataArray =>{
     //console.log(dataArray);
     const modalContainer = document.getElementById('modal-field');
+    
     dataArray.forEach(element => {
         console.log(element);
 
@@ -102,13 +103,27 @@ const displayNewsModal = dataArray =>{
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">${element.title}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                ...
+                <div class="row">
+                    <div>
+                        <img src=${element.thumbnail_url}>
+                        <p class="pt-3">${element.details}</p>
+                    </div>
+                </div>
               </div>
-              <div class="modal-footer">
+              <div class="modal-footer d-flex justify-content-between">
+              <div class="row">
+                            <div class="">
+                                <img class="img-header m-0 p-0" src="${element.author.img}" width="30" height="30" alt="">
+                            </div>
+                            <div class="m-0 p-0">
+                                <h6>${element.author.name? element.author.name:'No name Found'}</h6>
+                                <p>${element.author.published_date? element.author.published_date: 'no date found'}</p>
+                            </div>
+               </div>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               </div>
             </div>
