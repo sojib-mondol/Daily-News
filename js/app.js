@@ -65,7 +65,7 @@ const displayNewsDetail = newsArray =>{
                         </div>
                     </div>
                     <div class="col-4"><i class="fa-solid fa-eye"></i>${news.total_view? news.total_view: 'Not found'}</div>
-                    <div class="col-4"><button  class="btn btn-outline-primary">See more</button></div>
+                    <div class="col-4"><button type="button" onclick="getModalNewsId('${news._id}')" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">See more</button></div>
                 </div>
             </div>
         </div>
@@ -75,5 +75,46 @@ const displayNewsDetail = newsArray =>{
     })
 
     spinner(false); // stop spinner 
+}
 
+
+// for news modal
+const getModalNewsId = id => {
+    const url = ` https://openapi.programming-hero.com/api/news/${id}`;
+    fetch(url)
+    .then(res => res.json())
+    .then(data => displayNewsModal(data.data))
+    
+}
+
+
+// displaying modal
+const displayNewsModal = dataArray =>{
+    //console.log(dataArray);
+    const modalContainer = document.getElementById('modal-field');
+    dataArray.forEach(element => {
+        console.log(element);
+
+        const modalDiv = document.createElement('div');
+        modalDiv.innerHTML = `
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                ...
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        `
+        modalContainer.appendChild(modalDiv);
+    })
 }
