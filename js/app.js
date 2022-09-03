@@ -47,16 +47,16 @@ const displayNewsDetail = newsArray =>{
     newsArray.forEach(news =>{
         const displayElementDiv = document.createElement('div');
         displayElementDiv.innerHTML = `
-        <div class="row mt-5 border-0 rounded bg-light p-4">
+        <div class="row mt-5 border-0 flex-column flex-sm-column flex-md-row flex-lg-row rounded bg-light p-4">
             <div class="col-4">
                 <img src="${news.thumbnail_url}" class="img-fluid rounded" alt="">
             </div>
             <div class="col-8">
                 <h4 class="">${news.title}</h4>
                 <p>${news.details.slice(0,200)+'...'}</p>
-                <div class="row">
+                <div class="row flex-column flex-sm-column flex-md-row flex-lg-row align-items-sm-center">
                     <div class="col-4">
-                        <div class="row align-items-center">
+                        <div class="row align-items-center flex-column flex-sm-column flex-md-row flex-lg-row">
                             <div class="col-4">
                                 <img class="img-header m-0 p-0" src="${news.author.img}" width="30" height="30" alt="">
                             </div>
